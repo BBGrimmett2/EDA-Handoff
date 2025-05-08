@@ -7,6 +7,7 @@
         path: /tmp/application.txt
         line: "I am a working application"
         create: true
+        mode: '0644'
       delegate_to: workinghost.bk.lab
 
     - name: Create not working file
@@ -14,6 +15,7 @@
         path: /tmp/application.txt
         line: "I am not working"
         create: true
+        mode: '0644'
       delegate_to: brokenhost.bk.lab
 
     - name: Make not working file immutable
