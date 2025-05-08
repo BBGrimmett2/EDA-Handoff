@@ -10,8 +10,6 @@
       ignore_errors: true
       register: check
 
-    - name
-
     - name: See what failed
       ansible.builtin.debug:
         var: item
