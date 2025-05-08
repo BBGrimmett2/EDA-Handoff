@@ -10,11 +10,12 @@
       ignore_errors: true
       register: check
 
+    - name
+
     - name: See what failed
       ansible.builtin.debug:
-        var: item
-      loop: "{{ ansible_play_hosts_all | wantlist=True }}"
-      when: item == check.failed
+        msg: "{{ ansible_play_hosts_all | wantlist=True }}"
+      # when: item == check.failed
 
     # - name: Capture broken hosts
     #   ansible.builtin.set_stats:
