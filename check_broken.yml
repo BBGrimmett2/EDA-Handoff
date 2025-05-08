@@ -26,6 +26,11 @@
       delegate_to: localhost
       run_once: true
 
+    - name: Pass the failed hosts
+      ansible.builtin.set_stats:
+        data:
+          broken_hosts: "{{ unsuccessful_hosts }}"
+
     
     # - ansible.builtin.debug:
     #     msg: "{{ ansible_play_hosts }}"
