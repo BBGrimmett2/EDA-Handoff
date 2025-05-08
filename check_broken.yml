@@ -4,9 +4,9 @@
   become: true
   tasks:
     - name: Try writing to the file
-      ansible.builtin.lineinfile:
+      ansible.builtin.copy:
         path: /tmp/application.txt
-        line: "{{ new_line_text }}"
+        content: "I am a working application"
       register: check
   post_tasks:
     - name: Pass the failed hosts
