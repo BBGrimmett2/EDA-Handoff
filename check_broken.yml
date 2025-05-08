@@ -28,3 +28,9 @@
     # - name: See stats
     #   ansible.builtin.debug:
     #     msg: "{{ stats_were_set }}"
+
+    - set_fact:
+         unsuccessful_hosts: "{{ ansible_play_hosts_all|difference(ansible_play_hosts)}}"
+       delegate_facts: true
+       delegate_to: localhost
+       run_once: true
