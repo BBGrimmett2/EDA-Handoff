@@ -7,6 +7,7 @@
         that: broken_host is not 'None'
         fail_msg: "There are no broken hosts defined"
         success_msg: "There are broken hosts"
+      delegate_to: localhost
   tasks:
     - name: Show Broken hosts
       ansible.builtin.debug:
