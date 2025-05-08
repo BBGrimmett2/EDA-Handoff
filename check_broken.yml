@@ -11,22 +11,22 @@
       register: check
 
     - ansible.builtin.debug:
-        msg: "{{ ansible_play_hosts_all }}"
+        var: ansible_play_hosts_all
     
-    - ansible.builtin.debug:
-        msg: "{{ ansible_play_hosts }}"
+    # - ansible.builtin.debug:
+    #     msg: "{{ ansible_play_hosts }}"
         
-    - name: Create the failed hosts list
-      ansible.builtin.set_fact:
-        unsuccessful_hosts: "{{ ansible_play_hosts_all | difference(ansible_play_hosts)}}"
-      delegate_facts: true
-      delegate_to: localhost
-      run_once: true
+    # - name: Create the failed hosts list
+    #   ansible.builtin.set_fact:
+    #     unsuccessful_hosts: "{{ ansible_play_hosts_all | difference(ansible_play_hosts)}}"
+    #   delegate_facts: true
+    #   delegate_to: localhost
+    #   run_once: true
 
-    - name: Pass the failed hosts
-      ansible.builtin.set_stats:
-        data:
-          unsuccessful_hosts: "{{ unsuccessful_hosts }}"
+    # - name: Pass the failed hosts
+    #   ansible.builtin.set_stats:
+    #     data:
+    #       unsuccessful_hosts: "{{ unsuccessful_hosts }}"
 
     # - name: See what failed
     #   ansible.builtin.debug:
