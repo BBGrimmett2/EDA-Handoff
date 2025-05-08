@@ -13,3 +13,9 @@
         path: /tmp/application.txt
         line: "I am not working"
       delegate_to: brokenhost.bk.lab
+
+    - name: Make not working file immutable
+      ansible.builtin.file:
+        path: /tmp/application.txt
+        attributes: "+i"
+      delegate_to: brokenhost.bk.lab
