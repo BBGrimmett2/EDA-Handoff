@@ -3,18 +3,16 @@
   hosts: all
   tasks:
     - name: Create working file
-      ansible.builtin.lineinfile:
-        path: /tmp/application.txt
-        line: "I am a working application"
-        create: true
+      ansible.builtin.copy:
+        dest: /tmp/application.txt
+        content: "I am a working application"
         mode: '0644'
       delegate_to: workinghost.bk.lab
 
     - name: Create not working file
-      ansible.builtin.lineinfile:
-        path: /tmp/application.txt
-        line: "I am not working"
-        create: true
+      ansible.builtin.copy:
+        dest: /tmp/application.txt
+        content: "I am not working"
         mode: '0644'
       delegate_to: brokenhost.bk.lab
 
