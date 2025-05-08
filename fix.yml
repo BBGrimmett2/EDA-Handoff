@@ -1,10 +1,10 @@
 ---
 - name: Fix Application
-  hosts: "{{ broken_host | default(None) }}"
+  hosts: "{{ broken_host | default(localhost) }}"
   pre_tasks:
     - name: Ensure needed variables are correct
       ansible.builtin.assert:
-        that: broken_host is defined
+        that: broken_host is not localhost
         fail_msg: "There are no broken hosts defined"
         success_msg: "There are broken hosts"
       delegate_to: localhost
