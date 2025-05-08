@@ -8,62 +8,9 @@
         path: /tmp/application.txt
         line: "{{ new_line_text }}"
       register: check
-
-    - ansible.builtin.debug:
-        var: ansible_play_hosts_all
-      delegate_to: localhost
-      run_once: True
-
-    - ansible.builtin.debug:
-        var: ansible_play_hosts
-      delegate_to: localhost
-      run_once: True
-
-    # - name: Create the failed hosts list
-    #   ansible.builtin.set_fact:
-    #     unsuccessful_hosts: "{{ ansible_play_hosts_all | difference(ansible_play_hosts)}}"
-    #   delegate_facts: true
-    #   delegate_to: localhost
-    #   run_once: true
-
+  post_tasks:
     - name: Pass the failed hosts
       ansible.builtin.set_stats:
         data:
           broken_hosts: "{{ ansible_play_hosts_all | difference(ansible_play_hosts)}}"
       delegate_to: localhost
-
-    
-    # - ansible.builtin.debug:
-    #     msg: "{{ ansible_play_hosts }}"
-        
-    # - name: Create the failed hosts list
-    #   ansible.builtin.set_fact:
-    #     unsuccessful_hosts: "{{ ansible_play_hosts_all | difference(ansible_play_hosts)}}"
-    #   delegate_facts: true
-    #   delegate_to: localhost
-    #   run_once: true
-
-    # - name: Pass the failed hosts
-    #   ansible.builtin.set_stats:
-    #     data:
-    #       unsuccessful_hosts: "{{ unsuccessful_hosts }}"
-
-    # - name: See what failed
-    #   ansible.builtin.debug:
-    #     var: ansible_play_hosts_failed
-    #   # loop: "{{ lookup( 'ansible_play_hosts_all' , wantlist=True) }}"
-    #   when: item == check.failed
-
-    # - name: Capture broken hosts
-    #   ansible.builtin.set_stats:
-    #   register: stats_were_set
-
-    # - name: See stats
-    #   ansible.builtin.debug:
-    #     msg: "{{ stats_were_set }}"
-
-    # - set_fact:
-    #      unsuccessful_hosts: "{{ ansible_play_hosts_all|difference(ansible_play_hosts)}}"
-    #    delegate_facts: true
-    #    delegate_to: localhost
-    #    run_once: true
