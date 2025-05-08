@@ -12,6 +12,12 @@
 
     - ansible.builtin.debug:
         var: ansible_play_hosts_all
+      delegate_to: localhost
+
+    - ansible.builtin.debug:
+        var: ansible_play_hosts
+      delegate_to: localhost
+
     
     # - ansible.builtin.debug:
     #     msg: "{{ ansible_play_hosts }}"
