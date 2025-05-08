@@ -12,7 +12,11 @@
 
     - name: See what failed
       ansible.builtin.debug:
-        var: ansible_play_hosts_all
+        var: check.failed
+
+    - name: See what failed
+      ansible.builtin.debug:
+        var: ansible_play_hosts_failed
       # loop: "{{ lookup( 'ansible_play_hosts_all' , wantlist=True) }}"
       # when: item == check.failed
 
