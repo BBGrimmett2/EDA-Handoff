@@ -10,10 +10,17 @@
       ignore_errors: true
       register: check
 
-    - name: See what failed
-      ansible.builtin.debug:
-        var: check
-      when: check.failed == true
+    - name: Create the failed hosts list
+      ansible.builtin.set_fact:
+        unsuccessful_hosts: "{{ ansible_play_hosts_all|difference(ansible_play_hosts)}}"
+      delegate_facts: true
+      delegate_to: localhost
+      run_once: true
+
+    - name: Pass the failed hosts
+      ansible.builtin.set_stats:
+        data:
+          unsuccessful_hosts: "{{ unsuccessful_hosts }}"
 
     # - name: See what failed
     #   ansible.builtin.debug:
@@ -29,8 +36,8 @@
     #   ansible.builtin.debug:
     #     msg: "{{ stats_were_set }}"
 
-    - set_fact:
-         unsuccessful_hosts: "{{ ansible_play_hosts_all|difference(ansible_play_hosts)}}"
-       delegate_facts: true
-       delegate_to: localhost
-       run_once: true
+    # - set_fact:
+    #      unsuccessful_hosts: "{{ ansible_play_hosts_all|difference(ansible_play_hosts)}}"
+    #    delegate_facts: true
+    #    delegate_to: localhost
+    #    run_once: true
