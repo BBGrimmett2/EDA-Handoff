@@ -1,0 +1,15 @@
+---
+- name: Create Demo
+  hosts: all
+  tasks:
+    - name: Create working file
+      ansible.builtin.lineinfile:
+        path: /tmp/application.txt
+        line: "I am a working application"
+      delegate_to: workinghost.bk.lab
+
+    - name: Create not working file
+      ansible.builtin.lineinfile:
+        path: /tmp/application.txt
+        line: "I am not working"
+      delegate_to: brokenhost.bk.lab
