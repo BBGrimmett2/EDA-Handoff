@@ -5,7 +5,7 @@
   tasks:
     - name: Try writing to the file
       ansible.builtin.copy:
-        path: /tmp/application.txt
+        dest: /tmp/application.txt
         content: "I am a working application"
       register: check
   post_tasks:
