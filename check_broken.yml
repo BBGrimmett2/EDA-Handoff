@@ -12,7 +12,9 @@
 
     - name: See what failed
       ansible.builtin.debug:
-        msg: "{{ ansible_play_hosts_all }} == {{ check.failed }}"
+        var: item
+      loop: ansible_play_hosts_all
+      when: item == check.failed
 
     # - name: Capture broken hosts
     #   ansible.builtin.set_stats:
