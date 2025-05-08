@@ -16,6 +16,6 @@
             attributes: "-i"
 
         - name: Fix the application -- STAT!
-          ansible.builtin.lineinfile:
-            path: /tmp/application.txt
-            line: "I am a working application"
+          ansible.builtin.copy:
+            content: "I am a working application"
+            dest: /tmp/application.txt
