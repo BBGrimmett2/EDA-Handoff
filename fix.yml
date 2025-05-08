@@ -1,0 +1,25 @@
+---
+- name: Fix Application
+  hosts: all
+  pre_tasks:
+    - name: Ensure needed variables are correct
+      ansible.builtin.assert:
+        that: "broken_host is not None"
+        fail_msg: "There are no broken hosts defined"
+        success_msg: "There are broken hosts"
+  tasks:
+    - name: Show Broken hosts
+      ansible.builtin.debug:
+        msg: "Broken Hosts are: {{ broken_host }}"
+
+    - name: Make not working file mutable
+      ansible.builtin.file:
+        path: /tmp/application.txt
+        attributes: "-i"
+      delegate_to: "{{ broken_host }}"
+
+    - name: Fix the application -- STAT!
+      ansible.builtin.lineinfile:
+        path: /tmp/application.txt
+        line: "I am a working application"
+      delegate_to: "{{ broken_host }}"
