@@ -9,18 +9,15 @@
         success_msg: "There are broken hosts"
       delegate_to: localhost
   tasks:
-    - name: Show Broken hosts
-      ansible.builtin.debug:
-        msg: "Broken Hosts are: {{ broken_host }}"
-
-    - name: Make not working file mutable
-      ansible.builtin.file:
-        path: /tmp/application.txt
-        attributes: "-i"
+    - name: Execute the fix
       delegate_to: "{{ broken_host }}"
+      block:
+        - name: Make not working file mutable
+          ansible.builtin.file:
+            path: /tmp/application.txt
+            attributes: "-i"
 
-    - name: Fix the application -- STAT!
-      ansible.builtin.lineinfile:
-        path: /tmp/application.txt
-        line: "I am a working application"
-      delegate_to: "{{ broken_host }}"
+        - name: Fix the application -- STAT!
+          ansible.builtin.lineinfile:
+            path: /tmp/application.txt
+            line: "I am a working application"
