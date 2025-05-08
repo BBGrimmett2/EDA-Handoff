@@ -1,6 +1,6 @@
 ---
 - name: Fix Application
-  hosts: all
+  hosts: "{{ broken_host | default(None) }}"
   pre_tasks:
     - name: Ensure needed variables are correct
       ansible.builtin.assert:
@@ -10,7 +10,6 @@
       delegate_to: localhost
   tasks:
     - name: Execute the fix
-      delegate_to: "{{ broken_host }}"
       block:
         - name: Make not working file mutable
           ansible.builtin.file:
