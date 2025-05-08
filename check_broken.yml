@@ -7,3 +7,10 @@
       ansible.builtin.lineinfile:
         path: /tmp/application.txt
         line: "{{ new_line_text }}"
+    - name: Capture broken hosts
+      ansible.builtin.set_stats:
+      register: stats_were_set
+
+    - name: See stats
+      ansible.builtin.debug:
+        msg: "{{ stats_were_set }}"
