@@ -4,7 +4,7 @@
   pre_tasks:
     - name: Ensure needed variables are correct
       ansible.builtin.assert:
-        that: "broken_host is not 'None'"
+        that: broken_host is not 'None'
         fail_msg: "There are no broken hosts defined"
         success_msg: "There are broken hosts"
   tasks:
