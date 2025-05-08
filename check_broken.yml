@@ -7,16 +7,17 @@
       ansible.builtin.lineinfile:
         path: /tmp/application.txt
         line: "{{ new_line_text }}"
-      ignore_errors: true
       register: check
 
     - ansible.builtin.debug:
         var: ansible_play_hosts_all
       delegate_to: localhost
+      run_once: True
 
     - ansible.builtin.debug:
         var: ansible_play_hosts
       delegate_to: localhost
+      run_once: True
 
     
     # - ansible.builtin.debug:
