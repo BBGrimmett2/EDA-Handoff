@@ -1,0 +1,9 @@
+---
+- name: Check to see if we can force a failure
+  hosts: all
+  become: true
+  tasks:
+    - name: Try writing to the file
+      ansible.builtin.lineinfile:
+        path: /tmp/application.txt
+        line: "{{ new_line_text }}"
