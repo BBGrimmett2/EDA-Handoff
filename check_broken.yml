@@ -30,6 +30,7 @@
       ansible.builtin.set_stats:
         data:
           broken_hosts: "{{ ansible_play_hosts_all | difference(ansible_play_hosts)}}"
+      delegate_to: localhost
 
     
     # - ansible.builtin.debug:
