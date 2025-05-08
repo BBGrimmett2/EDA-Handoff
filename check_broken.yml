@@ -19,17 +19,17 @@
       delegate_to: localhost
       run_once: True
 
-    - name: Create the failed hosts list
-      ansible.builtin.set_fact:
-        unsuccessful_hosts: "{{ ansible_play_hosts_all | difference(ansible_play_hosts)}}"
-      delegate_facts: true
-      delegate_to: localhost
-      run_once: true
+    # - name: Create the failed hosts list
+    #   ansible.builtin.set_fact:
+    #     unsuccessful_hosts: "{{ ansible_play_hosts_all | difference(ansible_play_hosts)}}"
+    #   delegate_facts: true
+    #   delegate_to: localhost
+    #   run_once: true
 
     - name: Pass the failed hosts
       ansible.builtin.set_stats:
         data:
-          broken_hosts: "{{ unsuccessful_hosts }}"
+          broken_hosts: "{{ ansible_play_hosts_all | difference(ansible_play_hosts)}}"
 
     
     # - ansible.builtin.debug:
