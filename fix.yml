@@ -1,6 +1,6 @@
 ---
 - name: Fix Application
-  hosts: "{{ broken_host | default(localhost) }}"
+  hosts: "{{ broken_host | default('localhost') }}"
   pre_tasks:
     - name: Ensure needed variables are correct
       ansible.builtin.assert:
