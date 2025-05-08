@@ -1,0 +1,23 @@
+---
+- name: Create Demo
+  hosts: all
+  tasks:
+    - name: Create working file
+      ansible.builtin.copy:
+        dest: /tmp/application.txt
+        content: "I am a working application"
+        mode: '0644'
+      delegate_to: workinghost.bk.lab
+
+    - name: Create not working file
+      ansible.builtin.copy:
+        dest: /tmp/application.txt
+        content: "I am not working"
+        mode: '0644'
+      delegate_to: brokenhost.bk.lab
+
+    - name: Make not working file immutable
+      ansible.builtin.file:
+        path: /tmp/application.txt
+        attributes: "+i"
+      delegate_to: brokenhost.bk.lab
