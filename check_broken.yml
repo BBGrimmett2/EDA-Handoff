@@ -6,8 +6,8 @@
     - name: Try writing to the file
       ansible.builtin.copy:
         dest: /tmp/application.txt
-        content: "I am a working application"
-        mode: '0644'
+        content: I am a working application
+        mode: "0644"
 
   post_tasks:
     - name: Pass the failed hosts
