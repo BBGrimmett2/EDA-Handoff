@@ -8,11 +8,16 @@
         path: /tmp/application.txt
         line: "{{ new_line_text }}"
       ignore_errors: true
+      register: check
 
-    - name: Capture broken hosts
-      ansible.builtin.set_stats:
-      register: stats_were_set
-
-    - name: See stats
+    - name: See what failed
       ansible.builtin.debug:
-        msg: "{{ stats_were_set }}"
+        msg: "{{ ansible_play_hosts_all }} == {{ check.failed }}"
+
+    # - name: Capture broken hosts
+    #   ansible.builtin.set_stats:
+    #   register: stats_were_set
+
+    # - name: See stats
+    #   ansible.builtin.debug:
+    #     msg: "{{ stats_were_set }}"
