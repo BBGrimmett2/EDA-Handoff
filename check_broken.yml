@@ -11,9 +11,10 @@
       register: check
 
     - ansible.builtin.debug:
-        var:
-          - ansible_play_hosts_all
-          - ansbile_play_hosts
+        msg: "{{ ansible_play_hosts_all }}"
+    
+    - ansible.builtin.debug:
+        msg: "{{ ansible_play_hosts }}"
         
     - name: Create the failed hosts list
       ansible.builtin.set_fact:
