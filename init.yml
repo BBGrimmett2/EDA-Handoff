@@ -6,12 +6,14 @@
       ansible.builtin.lineinfile:
         path: /tmp/application.txt
         line: "I am a working application"
+        create: true
       delegate_to: workinghost.bk.lab
 
     - name: Create not working file
       ansible.builtin.lineinfile:
         path: /tmp/application.txt
         line: "I am not working"
+        create: true
       delegate_to: brokenhost.bk.lab
 
     - name: Make not working file immutable
